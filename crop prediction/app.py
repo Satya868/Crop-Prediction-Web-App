@@ -25,6 +25,7 @@ def page():
 
 @app.route('/result', methods=["POST"])
 def result():
+
     Nitrogen = float(request.form['Nitrogen'])
     Phosphorus = float(request.form['Phosphorus'])
     Potassium = float(request.form['Potassium'])
@@ -33,21 +34,16 @@ def result():
     Ph = float(request.form['ph'])
     Rainfall = float(request.form['Rainfall'])
      
-    values=[Nitrogen , Phosphorus, Potassium, Temperature, Humidity, Ph, Rainfall]
+    values = [Nitrogen , Phosphorus, Potassium, Temperature, Humidity, Ph, Rainfall]
 
     val = [values]
     if Ph > 14 or Ph < 0 :
         return render_template("result.html", ans = "Ph value is not in range")
     else:
         ans  = predict(val)
-
+        ans = (ans[0]).upper()
         return render_template("result.html", ans = ans)
         
-
-
-
-    
-    
 
 
 if __name__ == "__main__":
